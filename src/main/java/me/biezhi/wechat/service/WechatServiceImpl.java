@@ -378,7 +378,7 @@ public class WechatServiceImpl implements WechatService {
 						continue;
 					}
 					//白名单排除
-					String whiteList="@ã小路";
+					String whiteList="";
 					if(getUserRemarkName(msg.getString("FromUserName")).equals(whiteList))
 					{
 						LOGGER.info(msg.getString("FromUserName") + ": " + content);
