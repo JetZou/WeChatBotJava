@@ -23,7 +23,7 @@ public class WechatListener {
 				wechatService.choiceSyncLine(wechatMeta);
 				while(true){
 					int[] arr = wechatService.syncCheck(wechatMeta);
-					//LOGGER.info("retcode={}, selector={}", arr[0], arr[1]);
+					LOGGER.info("retcode={}, selector={}", arr[0], arr[1]);
 					
 					if(arr[0] == 1100){
 						LOGGER.info("你在手机上登出了微信，债见");
