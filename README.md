@@ -26,6 +26,7 @@ wechat-robot是基于微信网页版协议开发的普通微信号机器人程�
 ## Issues Report
 
 非常欢迎发issues
+最近赶作业～～我会尽快修复已经知道的问题
 
 ## Similar Projects
 @fritx [wxbot](https://github.com/fritx/wxbot)  
