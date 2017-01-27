@@ -372,9 +372,29 @@ public class WechatServiceImpl implements WechatService {
 					String[] peopleContent = content.split(":<br/>");
 					LOGGER.info("|" + name + "| " + peopleContent[0] + ":\n" + peopleContent[1].replace("<br/>", "\n"));
 				} else {
-					//群聊不回复
+					//群聊选择性回复
 					if (msg.getString("FromUserName").indexOf("@@") != -1) {
 						LOGGER.info(name + ": " + content);
+						String ans="";
+						if(content.contains("鸡年")&&content.length()>20)
+							ans="祝大家鸡年大吉大利，前程似锦，吉星高照！在新的一年里，愿大家万事如愿！duang,duang支付宝红包口令：“eWljb2Rlc+elneaCqOm4oeW5tOWkp+WQiQ==”，把解密后字符串输进去噢，小小心意，还望笑纳[福][鸡][福]";
+						else if(content.contains("阖家幸福")&&content.length()>20)
+							ans="祝大家鸡年大吉大利，新年快乐！在新的一年里，愿大家万事如愿！duang,duang支付宝红包口令：“eWljb2Rlc+elneaCqOm4oeW5tOWkp+WQiQ==”，把解密后字符串输进去噢，小小心意，还望笑纳[福][鸡][福]";
+						else if(content.contains("万事如意")&&content.length()>20)
+							ans="祝大家鸡年大吉大利，万事如意！在新的一年里，愿大家万事如愿！duang,duang支付宝红包口令：“eWljb2Rlc+elneaCqOm4oeW5tOWkp+WQiQ==”，把解密后字符串输进去噢，小小心意，还望笑纳[福][鸡][福]";
+						else if(content.contains("拜年")&&content.length()>20)
+							ans="祝大家鸡年大吉大利，身体健康！在新的一年里，愿大家万事如愿！duang,duang支付宝红包口令：“eWljb2Rlc+elneaCqOm4oeW5tOWkp+WQiQ==”，把解密后字符串输进去噢，小小心意，还望笑纳[福][鸡][福]";
+//						 String ans = robot.talk(content); //不使用机器人回复
+						else if(content.contains("祝")&&content.length()>20)
+							ans="祝大家身体健康，鸡年大吉大利，阖家幸福！在新的一年里，愿大家万事如愿！[太阳][太阳]duang,duang!支付宝红包口令：“eWljb2Rlc+elneaCqOm4oeW5tOWkp+WQiQ==”，把解密后字符串输进去噢，小小心意，还望笑纳[福][鸡][福]";
+						else
+							continue;
+						if(RecordCon.cache.contains(msg.getString("FromUserName"))){
+							LOGGER.info(name + ": " + content+"\n@@没有自动回复");
+							continue;
+						}
+						webwxsendmsg(wechatMeta, ans, msg.getString("FromUserName"));
+						LOGGER.info("自动回复 " +getUserRemarkName(msg.getString("FromUserName"))+"："+ ans);
 						continue;
 					}
 					//白名单排除
@@ -384,15 +404,27 @@ public class WechatServiceImpl implements WechatService {
 						LOGGER.info(msg.getString("FromUserName") + ": " + content);
 						continue;
 					}
-					//如果最近的一次自动回复是同一个人那就选择不回复
+//					如果最近的一次自动回复是同一个人那就选择不回复
 					if(RecordCon.cache.contains(msg.getString("FromUserName"))){
 						LOGGER.info(name + ": " + content+"\n@@没有自动回复");
 						continue;
 					}
 					//在此编辑
 					LOGGER.info(name + ": " + content);
+					String ans="";
+					if(content.contains("鸡年")&&content.length()>20)
+						ans="祝您鸡年大吉大利，阖家幸福！在新的一年里，愿您万事如愿！红包抢不停~~";
+					if(content.contains("阖家幸福")&&content.length()>20)
+						ans="祝您鸡年大吉大利，阖家幸福！在新的一年里，愿您万事如愿！红包抢不停~~";
+					if(content.contains("万事如意")&&content.length()>20)
+						ans="祝您鸡年大吉大利，阖家幸福！在新的一年里，愿您万事如愿！红包抢不停~~";
+					if(content.contains("拜年")&&content.length()>20)
+						ans="祝您鸡年大吉大利，阖家幸福！在新的一年里，愿您万事如愿！红包抢不停~~";
 //					 String ans = robot.talk(content); //不使用机器人回复
-					String ans = "在忙~迟点回复你。 ";
+					if(content.contains("祝")&&content.length()>20)
+						ans="祝您身体健康，鸡年大吉大利，阖家幸福！在新的一年里，愿您万事如愿！红包抢不停~~";
+					else
+						continue;
 					webwxsendmsg(wechatMeta, ans, msg.getString("FromUserName"));
 					LOGGER.info("自动回复 " +getUserRemarkName(msg.getString("FromUserName"))+"："+ ans);
 				}

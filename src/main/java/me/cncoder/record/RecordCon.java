@@ -3,6 +3,7 @@ package me.cncoder.record;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +19,17 @@ public class RecordCon {
 	public void writeCon(WechatMeta wechatMeta){
 		final File conn = new File("record/"+wechatMeta.getUser().getString("UserName")+".json");
 		//创建文件
-		if(!conn.exists())
+		if(!conn.exists()){
 			try {
 				conn.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			FileWriter writer;
+		}else {
+			
+		}
+			Writer writer;
 			try {
 				writer = new FileWriter(conn);
 				 String line = System.getProperty("line.separator");

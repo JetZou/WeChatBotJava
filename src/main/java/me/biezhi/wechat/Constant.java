@@ -9,6 +9,10 @@ import me.biezhi.wechat.model.WechatContact;
 
 public class Constant {
 
+	public class config {
+
+	}
+
 	public static final String HTTP_OK = "200";
 	public static final String BASE_URL = "https://webpush2.weixin.qq.com/cgi-bin/mmwebwx-bin";
 	public static final String JS_LOGIN_URL = "https://login.weixin.qq.com/jslogin";

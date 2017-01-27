@@ -3,13 +3,14 @@ package me.biezhi.wechat;
 import me.cncoder.record.ClearTask;
 
 import com.blade.kit.base.Config;
+import me.biezhi.wechat.Constant;
 
 public class Application {
 	
 	public static void main(String[] args) {
 		try {
 			
-			Constant.config = Config.load("classpath:config.properties");
+			Constant.config= Config.load("classpath:config.properties");
 			
 			WechatRobot wechatRobot = new WechatRobot();
 			wechatRobot.showQrCode();
